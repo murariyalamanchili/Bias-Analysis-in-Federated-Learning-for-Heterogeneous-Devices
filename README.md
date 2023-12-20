@@ -15,7 +15,7 @@ python main.py
 options:
 ```
   --dataset {mnist,cifar10}          
-  --federated_type {fedavg,afl,term}     
+  --federated_type {fedavg,afl,TERM}     
   --model {cnn,mlp}         
   --n_clients int            
   --global_epochs int    
@@ -55,7 +55,7 @@ python main.py --federated_type fedavg --dataset cifar10 --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset cifar10 --data_dist iid
 # TERM
-python main.py --federated_type term --dataset cifar10 --data_dist iid
+python main.py --federated_type TERM --dataset cifar10 --data_dist iid
 ```
 ##### mnist
 ```
@@ -64,7 +64,7 @@ python main.py --federated_type fedavg --dataset mnist --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset mnist --data_dist iid
 # TERM
-python main.py --federated_type term --dataset mnist --data_dist iid
+python main.py --federated_type TERM --dataset mnist --data_dist iid
 ```
 
 ##### fashionmnist
@@ -74,7 +74,7 @@ python main.py --federated_type fedavg --dataset fmnist --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset fmnist --data_dist iid
 # TERM
-python main.py --federated_type term --dataset fmnist --data_dist iid
+python main.py --federated_type TERM --dataset fmnist --data_dist iid
 ```
 
 #### From CSV
@@ -85,7 +85,7 @@ python main.py --federated_type fedavg --dataset cifar10 --data_dist from_csv --
 # AFL
 python main.py --federated_type afl --dataset cifar10 --data_dist from_csv --from_csv sample2
 # TERM
-python main.py --federated_type term --dataset cifar10 --data_dist from_csv --from_csv sample2
+python main.py --federated_type TERM --dataset cifar10 --data_dist from_csv --from_csv sample2
 
 ```
 ##### mnist
@@ -95,7 +95,7 @@ python main.py --federated_type fedavg --dataset mnist --data_dist from_csv --fr
 # AFL
 python main.py --federated_type afl --dataset mnist --data_dist from_csv --from_csv sample2
 # TERM
-python main.py --federated_type term --dataset mnist --data_dist from_csv --from_csv sample2
+python main.py --federated_type TERM --dataset mnist --data_dist from_csv --from_csv sample2
 ```
 ##### fashionmnist
 ```
@@ -104,5 +104,5 @@ python main.py --federated_type fedavg --dataset fmnist --data_dist from_csv --f
 # AFL
 python main.py --federated_type afl --dataset fmnist --data_dist from_csv --from_csv sample2
 # TERM
-python main.py --federated_type term --dataset fmnist --data_dist from_csv --from_csv sample2
+python main.py --federated_type TERM --dataset fmnist --data_dist from_csv --from_csv sample2
 ```
