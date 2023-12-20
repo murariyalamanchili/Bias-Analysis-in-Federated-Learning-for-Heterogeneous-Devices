@@ -24,6 +24,7 @@ options:
   --on_cuda {yes,no}
   --optimizer {sgd,adam}
   --lr float
+  --data_dist {from_csv,hetero}
   --iid {yes,no}
   --drfa_gamma float
 ```
