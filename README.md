@@ -54,6 +54,8 @@ docker run -it -v <host dir>:/app --gpus all agnostic_federated_learning
 python main.py --federated_type fedavg --dataset cifar10 --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset cifar10 --data_dist iid
+# TERM
+python main.py --federated_type term --dataset cifar10 --data_dist iid
 ```
 ##### mnist
 ```
