@@ -108,6 +108,35 @@ def from_csv(dataset, args):
             idx_map[i] = np.concatenate((idx_map[i], rand_set), axis=0)
     return idx_map
 
+def hetero_dirichlet_distribution(dataset, args):
+    csv_dir = os.path.join(args.root_path, 'config', args.from_csv + '.csv')
+    dist_config = np.loadtxt(csv_dir, delimiter=',')
+    idx_map = {i: np.array([]) for i in range(len(dist_config))}
+    
+    if type(dataset.targets) is list:
+        targets = torch.Tensor(dataset.targets)
+    else:
+        targets = dataset.targets
+    
+    for cls, dist in enumerate(dist_config.T):
+        idx = torch.where(targets == cls)[0].numpy()
+        l = len(idx)
+        ratio_list = dist / np.sum(dist)
+        
+        # Use hetero-Dirichlet distribution to sample ratios
+        sampled_ratios = np.random.dirichlet(dist + 0.1)
+        
+        for i, ratio in enumerate(sampled_ratios):
+            if i == len(sampled_ratios) - 1:
+                idx_map[i] = np.concatenate((idx_map[i], idx), axis=0)
+                break
+            
+            rand_set = np.random.choice(idx, size=int(l * ratio), replace=False)
+            idx = np.setdiff1d(idx, rand_set)
+            idx_map[i] = np.concatenate((idx_map[i], rand_set), axis=0)
+    
+    return idx_map
+
 def read_config(pth):
     config=np.loadtxt(pth,delimiter=',')
     return config
