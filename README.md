@@ -31,15 +31,15 @@ options:
 
 ### Docker setup
 
-Required host copmputer environment
+Required host computer environment
 ```
 - OS: Ubuntu20.04
 - CUDA 11.2
 ```
 
-Docer setup
+Docker setup
 ```
-docker build -t agnostic_federated_learning .
+docker build -t agnostic_federated_learning.
 docker run -it -v <host dir>:/app --gpus all agnostic_federated_learning
 ```
 
@@ -51,7 +51,7 @@ docker run -it -v <host dir>:/app --gpus all agnostic_federated_learning
 ##### cifar10
 ```
 # FedAvg
-python main.py --federated_type fedavgy --dataset cifar10 --data_dist iid
+python main.py --federated_type fedavg --dataset cifar10 --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset cifar10 --data_dist iid
 ```
@@ -61,6 +61,8 @@ python main.py --federated_type afl --dataset cifar10 --data_dist iid
 python main.py --federated_type fedavg --dataset mnist --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset mnist --data_dist iid
+# TERM
+python main.py --federated_type term --dataset mnist --data_dist iid
 ```
 
 ##### fashionmnist
@@ -69,6 +71,8 @@ python main.py --federated_type afl --dataset mnist --data_dist iid
 python main.py --federated_type fedavg --dataset fmnist --data_dist iid
 # AFL
 python main.py --federated_type afl --dataset fmnist --data_dist iid
+# TERM
+python main.py --federated_type term --dataset fmnist --data_dist iid
 ```
 
 #### From CSV
@@ -78,6 +82,9 @@ python main.py --federated_type afl --dataset fmnist --data_dist iid
 python main.py --federated_type fedavg --dataset cifar10 --data_dist from_csv --from_csv sample2
 # AFL
 python main.py --federated_type afl --dataset cifar10 --data_dist from_csv --from_csv sample2
+# TERM
+python main.py --federated_type term --dataset cifar10 --data_dist from_csv --from_csv sample2
+
 ```
 ##### mnist
 ```
@@ -85,6 +92,8 @@ python main.py --federated_type afl --dataset cifar10 --data_dist from_csv --fro
 python main.py --federated_type fedavg --dataset mnist --data_dist from_csv --from_csv sample2
 # AFL
 python main.py --federated_type afl --dataset mnist --data_dist from_csv --from_csv sample2
+# TERM
+python main.py --federated_type term --dataset mnist --data_dist from_csv --from_csv sample2
 ```
 ##### fashionmnist
 ```
@@ -92,4 +101,6 @@ python main.py --federated_type afl --dataset mnist --data_dist from_csv --from_
 python main.py --federated_type fedavg --dataset fmnist --data_dist from_csv --from_csv sample2
 # AFL
 python main.py --federated_type afl --dataset fmnist --data_dist from_csv --from_csv sample2
+# TERM
+python main.py --federated_type term --dataset fmnist --data_dist from_csv --from_csv sample2
 ```
