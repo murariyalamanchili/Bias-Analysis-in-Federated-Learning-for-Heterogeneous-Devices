@@ -61,12 +61,39 @@ class Afl_Global(GlobalBase):
         self.model.load_state_dict(w_avg)
 
 
+class TERM_Global(GlobalBase):
+    def __init__(self, args):
+        super().__init__(args)
+        self.tilting_factor = args.tilting_factor
+
+    def aggregate(self, local_params):
+        print("aggregating weights...")
+        global_weight = self.model
+        local_weights = []
+        losses = torch.zeros(self.args.n_clients)
+
+        for client_id, dataclass in local_params.items():
+            losses[client_id] = dataclass.TERM_loss
+            local_weights.append(dataclass.weight)
+
+        # Compute normalized weights using tilted empirical risk minimization
+        weights_exp = torch.exp(-self.tilting_factor * losses)
+        normalized_weights = weights_exp / torch.sum(weights_exp)
+
+        w_avg = weighted_average_weights(local_weights, global_weight.state_dict(), normalized_weights.to(self.device))
+
+        print("Normalized Weights:", normalized_weights)
+        self.model.load_state_dict(w_avg)
+
 def define_globalnode(args):
     if args.federated_type=='fedavg':#normal
         return Fedavg_Global(args)
         
     elif args.federated_type=='afl':#afl
         return Afl_Global(args)
+
+    elif args.federated_type=='TERM':#TERM
+        return TERM_Global(args)
         
     else:       
         raise NotImplementedError     
